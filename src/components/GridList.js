@@ -63,11 +63,16 @@ class MyGridList extends Component {
             <GridListTile
               key="Subheader"
               cols={3}
-              style={{ height: "auto" }}
+              style={{ height: 75 }}
               className="center"
             >
-              <ListSubheader component="div" color="inherit">
-                <Typography variant="h3" color="textPrimary">
+              <ListSubheader color="inherit">
+                <Typography
+                  component="p"
+                  align="center"
+                  variant="h3"
+                  color="textPrimary"
+                >
                   Riversong
                 </Typography>
               </ListSubheader>
