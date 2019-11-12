@@ -1,10 +1,11 @@
 import React from "react";
+import { Typography } from "@material-ui/core";
 
 const Home = () => {
   return (
-    <div className="container">
-      <p className="center">Nothing to see here</p>
-    </div>
+    <Typography component="p" variant="h3" className="center">
+      Nothing to see here
+    </Typography>
   );
 };
 

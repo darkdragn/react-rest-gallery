@@ -1,30 +1,57 @@
 import { Link, NavLink, withRouter } from "react-router-dom";
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+// import { Container, MenuIcon } from "@material-ui/core";
 
-const Navbar = () => {
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  menuButton: {
+    marginRight: theme.spacing(2)
+  },
+  title: {
+    flexGrow: 1
+  }
+}));
+
+const MyNavbar = () => {
+  const classes = useStyles();
+
   return (
-    <nav className="nav-wrapper blue darken-6">
-      <div className="container">
-        <Link className="brand-logo left" to="/">
-          TestTitle
-        </Link>
-        <ul className="right">
-          <li>
-            <NavLink to="/test">Test</NavLink>
-          </li>
-          <li>
-            <NavLink to="/grid">Grid</NavLink>
-          </li>
-          <li>
-            <NavLink to="/gridlist">GridList</NavLink>
-          </li>
-          <li>
-            <NavLink to="/gallery/riversong/seethrough">See Through</NavLink>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            component={Link}
+            to="/"
+            variant="h6"
+            className={classes.title}
+            color="textPrimary"
+          >
+            QuickImageViewer
+          </Typography>
+          <Button component={NavLink} to="/gridlist" color="inherit">
+            Grid
+          </Button>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 };
 
-export default withRouter(Navbar);
+export default withRouter(MyNavbar);

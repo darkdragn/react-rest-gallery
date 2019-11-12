@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import {
-  Container,
+  // Container,
   GridList,
   GridListTile,
   GridListTileBar,
@@ -9,15 +9,15 @@ import {
   Typography,
   Paper
 } from "@material-ui/core";
-import { styled } from "@material-ui/core/styles";
+// import { styled } from "@material-ui/core/styles";
 
-const StyledContainer = styled(Container)({
-  display: "flex",
-  flexWrap: "wrap",
-  justifyContent: "space-around",
-  overflow: "hidden",
-  paddingTop: 20
-});
+// const StyledContainer = styled(Container)({
+//   display: "flex",
+//   flexWrap: "wrap",
+//   justifyContent: "space-around",
+//   overflow: "hidden",
+//   paddingTop: 20
+// });
 
 class MyGridList extends Component {
   state = {
@@ -53,25 +53,25 @@ class MyGridList extends Component {
       : [];
 
     return (
-      <StyledContainer>
-        <Paper>
-          <GridList cellHeight={220} cols={3}>
-            <GridListTile
-              key="Subheader"
-              cols={3}
-              style={{ height: "auto" }}
-              className="center"
-            >
-              <ListSubheader component="div" color="inherit">
-                <Typography variant="h3" color="textPrimary">
-                  Riversong
-                </Typography>
-              </ListSubheader>
-            </GridListTile>
-            {cards}
-          </GridList>
-        </Paper>
-      </StyledContainer>
+      // <StyledContainer>
+      <Paper>
+        <GridList cellHeight={220} cols={3}>
+          <GridListTile
+            key="Subheader"
+            cols={3}
+            style={{ height: "auto" }}
+            className="center"
+          >
+            <ListSubheader component="div" color="inherit">
+              <Typography variant="h3" color="textPrimary">
+                Riversong
+              </Typography>
+            </ListSubheader>
+          </GridListTile>
+          {cards}
+        </GridList>
+      </Paper>
+      // {/* </StyledContainer> */}
     );
   }
 }
