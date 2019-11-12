@@ -34,7 +34,9 @@ class MyGallery extends React.Component {
             src: "https://bootstrap.dragns.net" + image.link,
             caption: image.name,
             subcaption: image.source,
-            thumbnail: image.thumbnail
+            thumbnail: image.thumbnail,
+            thumbnailWidth: image.t_width,
+            thumbnailHeight: image.t_height
           };
         })
       : [];
