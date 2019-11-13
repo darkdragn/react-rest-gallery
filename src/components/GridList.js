@@ -10,6 +10,8 @@ import {
   Paper
 } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
+import { Skeleton } from "@material-ui/lab";
+// import GridTile from "./GridTile";
 
 const StyledContainer = styled(Container)({
   display: "flex",
@@ -20,14 +22,15 @@ const StyledContainer = styled(Container)({
 
 class MyGridList extends Component {
   state = {
-    images: []
+    images: Array.from(new Array(9)),
+    loading: true
   };
 
   componentDidMount() {
     fetch("https://bootstrap.dragns.net/api/covers")
       .then(response => response.json())
       .then(data => {
-        this.setState({ images: data });
+        this.setState({ images: data, loading: false });
       })
       .catch((error, response) => {
         console.log(error);
@@ -35,26 +38,29 @@ class MyGridList extends Component {
       });
   }
   render() {
-    const { images } = this.state;
-    const cards = images.length
-      ? images.map(tile => {
-          let link = "/gallery/" + tile.person + "/" + tile.shoot;
-          return (
-            <GridListTile
-              key={tile.shoot}
-              component={Link}
-              to={link}
-              // style={{ height: "auto", width="100%" }}
-            >
-              <img src={tile.thumbnail} alt={tile.name} />
-              <GridListTileBar
-                title={tile.shoot}
-                subtitle={<span>by: {tile.source}</span>}
-              />
-            </GridListTile>
-          );
-        })
-      : [];
+    const { images, loading } = this.state;
+    const cards2 = images.map((tile, index) => {
+      let link = loading
+        ? "/gallery"
+        : "/gallery/" + tile.person + "/" + tile.shoot;
+      return (
+        <GridListTile key={index} component={Link} to={link}>
+          {tile ? (
+            <img src={tile.thumbnail} alt={tile.name} />
+          ) : (
+            <Skeleton variant="rect" width={800} height={600} />
+          )}
+          {tile ? (
+            <GridListTileBar
+              title={tile.shoot}
+              subtitle={<span>by: {tile.source}</span>}
+            />
+          ) : (
+            <GridListTileBar title="Loading" subtitle="Loading" />
+          )}
+        </GridListTile>
+      );
+    });
 
     return (
       <StyledContainer>
@@ -77,7 +83,7 @@ class MyGridList extends Component {
                 </Typography>
               </ListSubheader>
             </GridListTile>
-            {cards}
+            {cards2}
           </GridList>
         </Paper>
       </StyledContainer>
