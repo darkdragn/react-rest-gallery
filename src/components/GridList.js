@@ -9,9 +9,18 @@ import {
   Typography,
   Paper
 } from "@material-ui/core";
-import { styled } from "@material-ui/core/styles";
+import { styled, makeStyles } from "@material-ui/core/styles";
 import { Skeleton } from "@material-ui/lab";
 // import GridTile from "./GridTile";
+
+const StyledGridList = styled(GridList)({
+  gridList: {
+    width: 500,
+    height: 450,
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: "translateZ(0)"
+  }
+});
 
 const StyledContainer = styled(Container)({
   display: "flex",
@@ -65,7 +74,7 @@ class MyGridList extends Component {
     return (
       <StyledContainer>
         <Paper>
-          <GridList cellHeight={220} cols={3}>
+          <StyledGridList cellHeight={220} cols={3}>
             <GridListTile
               key="Subheader"
               cols={3}
@@ -84,7 +93,7 @@ class MyGridList extends Component {
               </ListSubheader>
             </GridListTile>
             {cards2}
-          </GridList>
+          </StyledGridList>
         </Paper>
       </StyledContainer>
     );
