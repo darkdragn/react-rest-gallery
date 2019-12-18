@@ -40,7 +40,7 @@ class MyGallery extends React.Component {
     return (
       <Paper>
         <Typography component="p" />
-        <Gallery images={cards} />
+        <Gallery images={cards} backdropClosesModal={true} />
       </Paper>
     );
   }

@@ -29,17 +29,19 @@ const StyledContainer = styled(Container)({
   overflow: "hidden"
 });
 
-class MyGridList extends Component {
+class GridModel extends Component {
   state = {
     images: Array.from(new Array(9)),
-    loading: true
+    loading: true,
+    model: "Loading"
   };
 
   componentDidMount() {
-    fetch("https://bootstrap.dragns.net/api/covers")
+    let { model } = this.props.match.params;
+    fetch("https://bootstrap.dragns.net/api/covers/" + model)
       .then(response => response.json())
       .then(data => {
-        this.setState({ images: data, loading: false });
+        this.setState({ images: data, loading: false, model: model });
       })
       .catch((error, response) => {
         console.log(error);
@@ -47,7 +49,7 @@ class MyGridList extends Component {
       });
   }
   render() {
-    const { images, loading } = this.state;
+    const { images, loading, model } = this.state;
     const cards2 = images.map((tile, index) => {
       let link = loading
         ? "/gallery"
@@ -88,7 +90,7 @@ class MyGridList extends Component {
                   variant="h3"
                   color="textPrimary"
                 >
-                  Riversong
+                  {model}
                 </Typography>
               </ListSubheader>
             </GridListTile>
@@ -100,4 +102,4 @@ class MyGridList extends Component {
   }
 }
 
-export default withRouter(MyGridList);
+export default withRouter(GridModel);
