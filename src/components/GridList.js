@@ -81,7 +81,7 @@ class MyGridList extends Component {
               style={{ height: 75 }}
               className="center"
             >
-              <ListSubheader color="inherit">
+              <ListSubheader component="div" color="inherit">
                 <Typography
                   component="p"
                   align="center"
