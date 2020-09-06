@@ -37,8 +37,8 @@ class MyGridList extends Component {
 
   componentDidMount() {
     fetch("https://bootstrap.dragns.net/api/covers")
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         this.setState({ images: data, loading: false });
       })
       .catch((error, response) => {
@@ -70,7 +70,6 @@ class MyGridList extends Component {
         </GridListTile>
       );
     });
-
     return (
       <StyledContainer>
         <Paper>
