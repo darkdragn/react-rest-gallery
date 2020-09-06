@@ -30,7 +30,13 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/gridlist" component={MyGridList} />
-                <Route path="/grid/:model" component={GridModel} />
+                {/* <Route path="/grid/:model" component={GridModel} /> */}
+                <Route
+                  path="/grid/:model"
+                  render={(props) => (
+                    <GridModel key={props.match.params.model} {...props} />
+                  )}
+                />
                 <Route path="/gallery/:person/:album" component={Gallery} />
               </Switch>
             </React.Fragment>

@@ -11,7 +11,8 @@ import {
 } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 import { Skeleton } from "@material-ui/lab";
-// import GridTile from "./GridTile";
+import { gql } from "@apollo/client";
+import { Query } from "@apollo/react-components";
 
 const StyledGridList = styled(GridList)({
   gridList: {
@@ -29,6 +30,19 @@ const StyledContainer = styled(Container)({
   overflow: "hidden"
 });
 
+// const getGql = () => {
+const SHOOT_QUERY = gql`
+  query {
+    imageMany(filter: { person: "Riversong", shoot: "Amy's Choice" }) {
+      person
+      name
+      shoot
+      source
+      thumbnail
+    }
+  }
+`;
+
 class GridModel extends Component {
   state = {
     images: Array.from(new Array(9)),
@@ -42,18 +56,32 @@ class GridModel extends Component {
       .then((response) => response.json())
       .then((data) => {
         this.setState({ images: data, loading: false, model: model });
+        this.setState({ ...this.state, bump: this.props.match.params.model });
       })
       .catch((error, response) => {
         console.log(error);
         console.log(response);
       });
   };
+  getGql = () => {
+    return (
+      <Query query={SHOOT_QUERY}>
+        {({ loading, error, data }) => {
+          if (loading) console.log("Loading...");
+          if (error) console.log(error);
+          console.log(data);
+          // if (data) {
+          //   this.setState()
+          // }
+          return <div>{/* <Link /> */}</div>;
+        }}
+      </Query>
+    );
+  };
+
   componentDidMount() {
     this.getData();
-  }
-
-  componentDidUpdate() {
-    this.getData();
+    this.getGql();
   }
 
   render() {
@@ -102,6 +130,15 @@ class GridModel extends Component {
                 </Typography>
               </ListSubheader>
             </GridListTile>
+            {/* <Query query={SHOOT_QUERY}>
+              {({ loading, error, data }) => {
+                console.log(data);
+                // if (data) {
+                //   this.setState()
+                // }
+                return <div></div>;
+              }}
+            </Query> */}
             {cards2}
           </StyledGridList>
         </Paper>
