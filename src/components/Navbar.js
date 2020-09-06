@@ -66,6 +66,7 @@ const MyNavbar = () => {
           <ListItemText primary="Loading ..." />
         </ListItem>
       );
+    if (error) console.log(error);
     // console.log(loading);
     // console.log(error);
     // console.log(data);
