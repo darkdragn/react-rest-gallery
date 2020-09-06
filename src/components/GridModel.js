@@ -36,18 +36,26 @@ class GridModel extends Component {
     model: "Loading"
   };
 
-  componentDidMount() {
+  getData = () => {
     let { model } = this.props.match.params;
     fetch("https://bootstrap.dragns.net/api/covers/" + model)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         this.setState({ images: data, loading: false, model: model });
       })
       .catch((error, response) => {
         console.log(error);
         console.log(response);
       });
+  };
+  componentDidMount() {
+    this.getData();
   }
+
+  componentDidUpdate() {
+    this.getData();
+  }
+
   render() {
     const { images, loading, model } = this.state;
     const cards2 = images.map((tile, index) => {
@@ -80,7 +88,7 @@ class GridModel extends Component {
             <GridListTile
               key="Subheader"
               cols={3}
-              style={{ height: 75 }}
+              style={{ height: 60, padding: "5px 0" }}
               className="center"
             >
               <ListSubheader color="inherit">

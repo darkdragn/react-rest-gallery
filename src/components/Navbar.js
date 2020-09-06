@@ -11,9 +11,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import { useQuery, gql } from "@apollo/client";
 // import { Container, MenuIcon } from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     paddingBottom: 20
@@ -38,7 +39,7 @@ const MyNavbar = () => {
     right: false
   });
 
-  const toggleDrawer = (side, open) => event => {
+  const toggleDrawer = (side, open) => (event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -49,6 +50,35 @@ const MyNavbar = () => {
     setState({ ...state, [side]: open });
   };
 
+  const MODELS = gql`
+    query {
+      imageDistinct(field: "person") {
+        person
+      }
+    }
+  `;
+  const { loading, error, data } = useQuery(MODELS);
+  // console.log(data);
+  const modelList = () => {
+    if (loading)
+      return (
+        <ListItem>
+          <ListItemText primary="Loading ..." />
+        </ListItem>
+      );
+    // console.log(loading);
+    // console.log(error);
+    // console.log(data);
+    return data.imageDistinct.map((model) => {
+      let link = "/grid/" + model.person;
+      return (
+        <ListItem button component={NavLink} to={link} key={model.person}>
+          <ListItemText primary={model.person} />
+        </ListItem>
+      );
+    });
+  };
+  // console.log(modelList)
   const sideList = () => {
     const side = "left";
     return (
@@ -59,9 +89,10 @@ const MyNavbar = () => {
         onKeyDown={toggleDrawer(side, false)}
       >
         <List>
-          <ListItem button component={NavLink} to="/gridlist" key="Models">
+          {/* <ListItem button component={NavLink} to="/gridlist" key="Models">
             <ListItemText primary="Models" />
-          </ListItem>
+          </ListItem> */}
+          {modelList()}
         </List>
       </div>
     );
