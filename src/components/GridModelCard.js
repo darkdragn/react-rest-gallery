@@ -64,7 +64,7 @@ const MakeCard = ({ images, loading, model }) => {
             style={{ height: 60, padding: "5px 0" }}
             className="center"
           >
-            <ListSubheader color="inherit">
+            <ListSubheader color="inherit" component="div">
               <Typography
                 component="p"
                 align="center"
@@ -78,23 +78,22 @@ const MakeCard = ({ images, loading, model }) => {
           {images.map((tile, index) => {
             let link = loading
               ? "/gallery"
-              : "/gallery/" + tile.person + "/" + tile.shoot;
+              : `/gallery/${tile.person}/${tile.shoot}`;
 
             return (
               <GridListTile key={index} component={Link} to={link}>
-                {tile ? (
-                  <img src={tile.thumbnail} alt={tile.name} />
-                ) : (
-                  <Skeleton variant="rect" width={800} height={600} />
-                )}
-                {tile ? (
-                  <GridListTileBar
-                    title={tile.shoot}
-                    subtitle={<span>by: {tile.source}</span>}
-                  />
-                ) : (
-                  <GridListTileBar title="Loading" subtitle="Loading" />
-                )}
+                {tile
+                  ? [
+                      <img src={tile.thumbnail} alt={tile.name} />,
+                      <GridListTileBar
+                        title={tile.shoot}
+                        subtitle={<span>by: {tile.source}</span>}
+                      />
+                    ]
+                  : [
+                      <Skeleton variant="rect" width={800} height={600} />,
+                      <GridListTileBar title="Loading" subtitle="Loading" />
+                    ]}
               </GridListTile>
             );
           })}
