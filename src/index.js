@@ -4,8 +4,9 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { createMuiTheme, CssBaseline } from "@material-ui/core";
 
-import { Cards, Home, MyNavbar, MyGridList, Gallery } from "./components";
+import { Cards, Home, MyNavbar, Gallery } from "./components";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import GridModelCard from "./components/GridModelCard";
 
 const client = new ApolloClient({
   uri: "https://bootstrap.dragns.net/graphql",
@@ -29,15 +30,14 @@ class App extends Component {
               <MyNavbar />
               <Switch>
                 <Route exact path="/" component={Home} />
-                <Route path="/gridlist" component={MyGridList} />
-                {/* <Route path="/grid/:model" component={GridModel} /> */}
+                <Route path="/gridlist" component={GridModelCard} />
                 <Route
                   path="/grid/:model"
                   render={(props) => (
                     <Cards key={props.match.params.model} {...props} />
                   )}
                 />
-                <Route path="/gallery/:person/:album" component={Gallery} />
+                <Route path="/gallery/:person/:shoot" component={Gallery} />
               </Switch>
             </React.Fragment>
           </ApolloProvider>

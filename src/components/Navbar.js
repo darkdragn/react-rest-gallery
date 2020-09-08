@@ -12,7 +12,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { useQuery, gql } from "@apollo/client";
-// import { Container, MenuIcon } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,8 +57,8 @@ const MyNavbar = () => {
     }
   `;
   const { loading, error, data } = useQuery(MODELS);
-  // console.log(data);
-  const modelList = () => {
+
+  const ModelList = () => {
     if (loading)
       return (
         <ListItem>
@@ -67,9 +66,6 @@ const MyNavbar = () => {
         </ListItem>
       );
     if (error) console.log(error);
-    // console.log(loading);
-    // console.log(error);
-    // console.log(data);
     return data.imageDistinct.map((model) => {
       let link = "/grid/" + model.person;
       return (
@@ -79,8 +75,8 @@ const MyNavbar = () => {
       );
     });
   };
-  // console.log(modelList)
-  const sideList = () => {
+
+  const SideList = () => {
     const side = "left";
     return (
       <div
@@ -90,10 +86,7 @@ const MyNavbar = () => {
         onKeyDown={toggleDrawer(side, false)}
       >
         <List>
-          {/* <ListItem button component={NavLink} to="/gridlist" key="Models">
-            <ListItemText primary="Models" />
-          </ListItem> */}
-          {modelList()}
+          <ModelList />
         </List>
       </div>
     );
@@ -102,7 +95,7 @@ const MyNavbar = () => {
   return (
     <div className={classes.root}>
       <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
-        {sideList("left")}
+        <SideList />
       </Drawer>
       <AppBar position="sticky" color="default">
         <Toolbar>

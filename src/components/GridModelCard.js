@@ -13,9 +13,21 @@ import { useQuery, gql } from "@apollo/client";
 import { Skeleton } from "@material-ui/lab";
 import React from "react";
 
-const SHOOT_QUERY = gql`
+const SHOOT_MODEL_QUERY = gql`
   query Model($model: String!) {
     imageShoots(model: $model) {
+      person
+      name
+      shoot
+      source
+      thumbnail
+    }
+  }
+`;
+
+const SHOOT_QUERY = gql`
+  query Model {
+    imageShoots {
       person
       name
       shoot
@@ -94,11 +106,19 @@ const MakeCard = ({ images, loading, model }) => {
 };
 
 const Card = () => {
-  const { model } = useParams();
-  const { loading, error, data } = useQuery(SHOOT_QUERY, {
-    variables: { model: model }
-  });
-  // var state = {}
+  var { model } = useParams();
+  var query = SHOOT_MODEL_QUERY;
+  var options;
+
+  if (!model) {
+    model = "All Shoots";
+    query = SHOOT_QUERY;
+  } else {
+    options = { variables: { model: model } };
+  }
+
+  const { loading, error, data } = useQuery(query, options);
+
   if (loading) {
     const state = {
       images: Array.from(new Array(9)),
@@ -107,6 +127,7 @@ const Card = () => {
     };
     return MakeCard(state);
   }
+
   if (error) return <div />;
   if (data) {
     const state = {

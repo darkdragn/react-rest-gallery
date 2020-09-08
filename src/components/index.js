@@ -1,7 +1,6 @@
 import Home from "./Home";
-import Gallery from "./Gallery";
-import MyGridList from "./GridList";
 import MyNavbar from "./Navbar";
 import Cards from "./GridModelCard";
+import Gallery from "./GalleryGraphql";
 
-export { Cards, Home, MyNavbar, MyGridList, Gallery };
+export { Cards, Home, MyNavbar, Gallery };
