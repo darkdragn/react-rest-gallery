@@ -48,7 +48,11 @@ const GalleryComponent = () => {
   return (
     <Paper>
       <Typography component="p" />
-      <Gallery images={cards} backdropClosesModal={true} />
+      <Gallery
+        images={cards}
+        backdropClosesModal={true}
+        showLightboxThumbnails={true}
+      />
     </Paper>
   );
 };
