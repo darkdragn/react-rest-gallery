@@ -4,7 +4,7 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { createMuiTheme, CssBaseline } from "@material-ui/core";
 
-import { Home, MyNavbar, MyGridList, Gallery, GridModel } from "./components";
+import { Cards, Home, MyNavbar, MyGridList, Gallery } from "./components";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 const client = new ApolloClient({
@@ -34,7 +34,7 @@ class App extends Component {
                 <Route
                   path="/grid/:model"
                   render={(props) => (
-                    <GridModel key={props.match.params.model} {...props} />
+                    <Cards key={props.match.params.model} {...props} />
                   )}
                 />
                 <Route path="/gallery/:person/:album" component={Gallery} />

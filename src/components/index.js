@@ -1,7 +1,7 @@
 import Home from "./Home";
 import Gallery from "./Gallery";
-import GridModel from "./GridModel";
 import MyGridList from "./GridList";
 import MyNavbar from "./Navbar";
+import Cards from "./GridModelCard";
 
-export { Home, MyNavbar, MyGridList, Gallery, GridModel };
+export { Cards, Home, MyNavbar, MyGridList, Gallery };

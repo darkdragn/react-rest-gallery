@@ -12,8 +12,8 @@ class MyGallery extends React.Component {
     let url = "https://bootstrap.dragns.net/api/" + person + "/" + album;
 
     fetch(url)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         this.setState({ images: data });
       })
       .catch((error, response) => {
@@ -25,9 +25,11 @@ class MyGallery extends React.Component {
   render() {
     const { images } = this.state;
     const cards = images.length
-      ? images.map(image => {
+      ? images.map((image) => {
+          const { name, shoot, person } = image;
+          const link = `/photos/byShoot/${person}/${shoot}/${name}`;
           return {
-            src: "https://bootstrap.dragns.net" + image.link,
+            src: link,
             caption: image.name,
             subcaption: image.source,
             thumbnail: image.thumbnail,
