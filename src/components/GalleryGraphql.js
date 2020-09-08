@@ -24,7 +24,13 @@ const GalleryComponent = () => {
     variables: { person, shoot }
   });
 
-  if (loading) return <Typography component="p"> "Loading..." </Typography>;
+  if (loading)
+    return (
+      <Typography align="center" component="p" variant="h3" className="center">
+        Loading...
+      </Typography>
+    );
+
   if (error) return <Typography component="p"> {error} </Typography>;
   const images = data.imageMany;
   const cards = images.map((image) => {
