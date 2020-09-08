@@ -91,7 +91,12 @@ const MakeCard = ({ images, loading, model }) => {
                       />
                     ]
                   : [
-                      <Skeleton variant="rect" width={800} height={600} />,
+                      <Skeleton
+                        variant="rect"
+                        width={800}
+                        height={600}
+                        key={index}
+                      />,
                       <GridListTileBar title="Loading" subtitle="Loading" />
                     ]}
               </GridListTile>

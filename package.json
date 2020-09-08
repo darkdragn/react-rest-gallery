@@ -18,7 +18,8 @@
     "react-grid-gallery": "0.5.5",
     "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "subscriptions-transport-ws": "0.9.18"
   },
   "devDependencies": {
     "typescript": "3.3.3"
