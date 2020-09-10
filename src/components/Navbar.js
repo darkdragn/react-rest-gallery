@@ -115,7 +115,7 @@ const MyNavbar = () => {
             className={classes.title}
             color="textPrimary"
           >
-            QuickImageViewer
+            DragnGallery
           </Typography>
           <Button component={NavLink} to="/gridlist" color="inherit">
             Grid
