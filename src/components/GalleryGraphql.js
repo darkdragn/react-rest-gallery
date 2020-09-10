@@ -6,7 +6,7 @@ import Gallery from "react-grid-gallery";
 
 const SHOOT_QUERY = gql`
   query Query($person: String!, $shoot: String!) {
-    imageMany(filter: { person: $person, shoot: $shoot }) {
+    imageMany(filter: { person: $person, shoot: $shoot }, sort: NAME_ASC) {
       person
       name
       shoot

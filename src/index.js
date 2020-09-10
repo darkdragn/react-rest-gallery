@@ -8,8 +8,13 @@ import { Cards, Home, MyNavbar, Gallery } from "./components";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import GridModelCard from "./components/GridModelCard";
 
+const graph_url =
+  process.env.NODE_ENV === "development"
+    ? "https://bootstrap.dragns.net/graphql"
+    : "/graphql";
+
 const client = new ApolloClient({
-  uri: "https://bootstrap.dragns.net/graphql",
+  uri: graph_url,
   cache: new InMemoryCache()
 });
 
@@ -38,6 +43,7 @@ class App extends Component {
                   )}
                 />
                 <Route path="/gallery/:person/:shoot" component={Gallery} />
+                {/* <Route path="/comic/:person/:shoot" component={Comic} /> */}
               </Switch>
             </React.Fragment>
           </ApolloProvider>
