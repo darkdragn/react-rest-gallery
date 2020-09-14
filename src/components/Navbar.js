@@ -117,6 +117,9 @@ const MyNavbar = () => {
           >
             DragnGallery
           </Typography>
+          <Button component={NavLink} to="/spring" color="inherit">
+            Spring
+          </Button>
           <Button component={NavLink} to="/gridlist" color="inherit">
             Grid
           </Button>
