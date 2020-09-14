@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import queryString from "query-string";
 import Lightbox from "react-spring-lightbox";
 import { useQuery, gql } from "@apollo/client";
-import { Typography } from "@material-ui/core";
+import { IconButton, Typography } from "@material-ui/core";
+import { ArrowLeft, ArrowRight } from "@material-ui/icons";
 
 const SHOOT_QUERY = gql`
   query Query($person: String!, $shoot: String!) {
@@ -18,7 +21,11 @@ const SHOOT_QUERY = gql`
 `;
 
 const CoolLightbox = () => {
-  const [currentImageIndex, setCurrentIndex] = useState(41);
+  const location = useLocation();
+  const router = { query: queryString.parse(location.search) };
+  const start = router.query.index ? router.query.index : 41;
+
+  const [currentImageIndex, setCurrentIndex] = useState(start);
 
   const gotoPrevious = () =>
     currentImageIndex > 0 && setCurrentIndex(currentImageIndex - 1);
@@ -60,8 +67,31 @@ const CoolLightbox = () => {
       /* Add your own UI */
       // renderHeader={() => (<CustomHeader />)}
       // renderFooter={() => (<CustomFooter />)}
-      // renderPrevButton={() => (<CustomLeftArrowButton />)}
-      // renderNextButton={() => (<CustomRightArrowButton />)}
+      renderPrevButton={() => (
+        <Typography align="left" style={{ flex: 1 }}>
+          <IconButton
+            onClick={gotoPrevious}
+            style={{ zIndex: 10, position: "left" }}
+            size="medium"
+            edge="start"
+            position="left"
+            variant="contained"
+          >
+            <ArrowLeft />
+          </IconButton>
+        </Typography>
+      )}
+      renderNextButton={() => (
+        <IconButton
+          onClick={gotoNext}
+          style={{ zIndex: 10, position: "left" }}
+          size="medium"
+          edge="end"
+          position={"left"}
+        >
+          <ArrowRight />
+        </IconButton>
+      )}
       // renderImageOverlay={() => (<ImageOverlayComponent >)}
 
       /* Add styling */
