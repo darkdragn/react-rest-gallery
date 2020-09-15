@@ -13,9 +13,6 @@ const SHOOT_QUERY = gql`
       name
       shoot
       source
-      t_width
-      t_height
-      thumbnail
     }
   }
 `;

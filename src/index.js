@@ -4,7 +4,14 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { createMuiTheme, CssBaseline } from "@material-ui/core";
 
-import { Cards, CoolLightBox, Home, MyNavbar, Gallery } from "./components";
+import {
+  Cards,
+  CoolLightBox,
+  Home,
+  MyNavbar,
+  Gallery,
+  SpringGallery
+} from "./components";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import GridModelCard from "./components/GridModelCard";
 
@@ -36,7 +43,8 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/gridlist" component={GridModelCard} />
-                <Route path="/spring" component={CoolLightBox} />
+                <Route exact path="/spring" component={CoolLightBox} />
+                <Route path="/spring/:model/:shoot" component={SpringGallery} />
                 <Route
                   path="/grid/:model"
                   render={(props) => (
