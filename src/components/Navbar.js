@@ -93,11 +93,10 @@ const MyNavbar = () => {
   };
 
   return (
-    <div className={classes.root}>
+      <AppBar position="sticky" color="default">
       <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
         <SideList />
       </Drawer>
-      <AppBar position="sticky" color="default">
         <Toolbar>
           <IconButton
             edge="start"
@@ -125,7 +124,6 @@ const MyNavbar = () => {
           </Button>
         </Toolbar>
       </AppBar>
-    </div>
   );
 };
 
