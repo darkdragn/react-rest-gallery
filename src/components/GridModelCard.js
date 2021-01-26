@@ -50,7 +50,8 @@ const StyledContainer = styled(Container)({
   display: "flex",
   flexWrap: "wrap",
   justifyContent: "space-around",
-  overflow: "hidden"
+  overflow: "hidden",
+  padding: "30px"
 });
 
 const MakeCard = ({ images, loading, model }) => {

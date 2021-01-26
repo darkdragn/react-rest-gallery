@@ -17,7 +17,7 @@ import GridModelCard from "./components/GridModelCard";
 
 const graph_url =
   process.env.NODE_ENV === "development"
-    ? "https://bootstrap.dragns.net/graphql"
+    ? "https://gallery.dragns.net/graphql"
     : "/graphql";
 
 const client = new ApolloClient({

@@ -1,5 +1,5 @@
 import { useQuery, gql } from "@apollo/client";
-import { Paper, Typography } from "@material-ui/core";
+import { Paper, Typography, makeStyles } from "@material-ui/core";
 import React from "react";
 import { withRouter, useParams } from "react-router-dom";
 import Gallery from "react-grid-gallery";
@@ -18,7 +18,14 @@ const SHOOT_QUERY = gql`
   }
 `;
 
+const useStyles = makeStyles({
+  root: {
+    padding: "30px"
+  }
+})
+
 const GalleryComponent = () => {
+  const classes = useStyles()
   const { person, shoot } = useParams();
   const { loading, error, data } = useQuery(SHOOT_QUERY, {
     variables: { person, shoot }
@@ -46,7 +53,7 @@ const GalleryComponent = () => {
     };
   });
   return (
-    <Paper>
+    <Paper class={classes.root}>
       <Typography component="p" />
       <Gallery
         images={cards}
