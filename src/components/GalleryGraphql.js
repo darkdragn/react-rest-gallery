@@ -1,5 +1,13 @@
 import { useQuery, gql } from "@apollo/client";
-import { Paper, Typography, makeStyles } from "@material-ui/core";
+import {
+  Breadcrumbs,
+  Container,
+  Link,
+  Paper,
+  Typography,
+  makeStyles,
+  styled,
+} from "@material-ui/core";
 import React from "react";
 import { withRouter, useParams } from "react-router-dom";
 import Gallery from "react-grid-gallery";
@@ -20,15 +28,23 @@ const SHOOT_QUERY = gql`
 
 const useStyles = makeStyles({
   root: {
-    padding: "30px"
-  }
-})
+    padding: "20px",
+  },
+});
+
+const StyledContainer = styled(Container)({
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "space-around",
+  overflow: "hidden",
+  padding: "30px",
+});
 
 const GalleryComponent = () => {
-  const classes = useStyles()
+  const classes = useStyles();
   const { person, shoot } = useParams();
   const { loading, error, data } = useQuery(SHOOT_QUERY, {
-    variables: { person, shoot }
+    variables: { person, shoot },
   });
 
   if (loading)
@@ -49,18 +65,29 @@ const GalleryComponent = () => {
       subcaption: image.source,
       thumbnail: image.thumbnail,
       thumbnailWidth: image.t_width,
-      thumbnailHeight: image.t_height
+      thumbnailHeight: image.t_height,
     };
   });
   return (
-    <Paper class={classes.root}>
-      <Typography component="p" />
-      <Gallery
-        images={cards}
-        backdropClosesModal={true}
-        showLightboxThumbnails={true}
-      />
-    </Paper>
+    <StyledContainer>
+      <Paper classes={classes}>
+        <Breadcrumbs aria-label="breadcrumb">
+          <Link color="inherit" href="/">
+            DragnGallery
+          </Link>
+          <Link color="inherit" href={`/grid/${person}`}>
+            {person}
+          </Link>
+          <Typography color="textPrimary">{shoot}</Typography>
+        </Breadcrumbs>
+        <p />
+        <Gallery
+          images={cards}
+          backdropClosesModal={true}
+          showLightboxThumbnails={true}
+        />
+      </Paper>
+    </StyledContainer>
   );
 };
 

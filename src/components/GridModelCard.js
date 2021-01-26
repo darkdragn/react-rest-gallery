@@ -1,16 +1,18 @@
 import { Link, withRouter, useParams } from "react-router-dom";
 import {
+  Breadcrumbs,
   Container,
   GridListTile,
   GridListTileBar,
   GridList,
   ListSubheader,
   Paper,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 import { useQuery, gql } from "@apollo/client";
 import { Skeleton } from "@material-ui/lab";
+import MLink from "@material-ui/core/Link"
 import React from "react";
 
 const SHOOT_MODEL_QUERY = gql`
@@ -42,8 +44,8 @@ const StyledGridList = styled(GridList)({
     width: 500,
     height: 450,
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: "translateZ(0)"
-  }
+    transform: "translateZ(0)",
+  },
 });
 
 const StyledContainer = styled(Container)({
@@ -51,7 +53,7 @@ const StyledContainer = styled(Container)({
   flexWrap: "wrap",
   justifyContent: "space-around",
   overflow: "hidden",
-  padding: "30px"
+  padding: "30px",
 });
 
 const MakeCard = ({ images, loading, model }) => {
@@ -65,15 +67,13 @@ const MakeCard = ({ images, loading, model }) => {
             style={{ height: 60, padding: "5px 0" }}
             className="center"
           >
-            <ListSubheader color="inherit" component="div">
-              <Typography
-                component="p"
-                align="center"
-                variant="h3"
-                color="textPrimary"
-              >
-                {model}
-              </Typography>
+            <ListSubheader color="inherit" component="div" className="center">
+              <Breadcrumbs aria-label="breadcrumb">
+                <MLink color="inherit" href="/">
+                  DragnGallery
+                </MLink>
+                <Typography color="textPrimary">{model}</Typography>
+              </Breadcrumbs>
             </ListSubheader>
           </GridListTile>
           {images.map((tile, index) => {
@@ -89,7 +89,7 @@ const MakeCard = ({ images, loading, model }) => {
                       <GridListTileBar
                         title={tile.shoot}
                         subtitle={<span>by: {tile.source}</span>}
-                      />
+                      />,
                     ]
                   : [
                       <Skeleton
@@ -98,7 +98,7 @@ const MakeCard = ({ images, loading, model }) => {
                         height={600}
                         key={index}
                       />,
-                      <GridListTileBar title="Loading" subtitle="Loading" />
+                      <GridListTileBar title="Loading" subtitle="Loading" />,
                     ]}
               </GridListTile>
             );
@@ -128,7 +128,7 @@ const Card = () => {
     const state = {
       images: Array.from(new Array(9)),
       loading: true,
-      model: "Loading"
+      model: "Loading",
     };
     return MakeCard(state);
   }
@@ -138,7 +138,7 @@ const Card = () => {
     const state = {
       images: data.imageShoots,
       loading: false,
-      model: model
+      model: model,
     };
     return MakeCard(state);
   }
